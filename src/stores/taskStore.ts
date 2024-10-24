@@ -1,4 +1,3 @@
-// src/stores/taskStore.ts
 import { makeAutoObservable } from 'mobx';
 import { Task } from '../models/Task';
 

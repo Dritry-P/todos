@@ -1,4 +1,3 @@
-// src/components/TaskItem.tsx
 import React, { useState } from 'react';
 import { Task } from '../models/Task';
 import taskStore from '../stores/taskStore';

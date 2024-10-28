@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import taskStore from '../stores/taskStore';
+import { Task } from '../models/Task';
 
 const TaskForm: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -14,6 +15,16 @@ const TaskForm: React.FC = () => {
       status: 'pending',
       file,
     });
+    const newTask: Task = {
+      id: Date.now(),
+      title,
+      description,
+      status: 'pending',
+      file,
+    };
+
+    taskStore.addTaskOnServe(newTask)
+
     setTitle('');
     setDescription('');
     setFile(null);
@@ -36,7 +47,12 @@ const TaskForm: React.FC = () => {
       />
       <input
         type="file"
-        onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+        onChange={(e) => {
+          const files = e.target.files;
+          if (files && files.length > 0) {
+            setFile(files[0]);
+          }
+        }}
         className="form-control mt-2"
       />
       <button onClick={handleSubmit} className="btn btn-primary mt-3">
